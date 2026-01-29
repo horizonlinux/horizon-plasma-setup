@@ -1,7 +1,7 @@
 %global qt6_minver 6.6.0
 %global kf6_minver 6.5.0
 
-%global commit bbb5fb4b76cf4f9bb093e29de0bf4fb3a38b08ec
+%global commit 9ee33221806c9e1807c421a5a88a01475afed6c5
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global date 20251208
 
