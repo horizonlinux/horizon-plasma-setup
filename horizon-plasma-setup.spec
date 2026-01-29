@@ -55,8 +55,7 @@ Requires:       dbus-common
 Requires:       kf6-filesystem
 Requires:       kf6-kauth
 
-# Require plasma-lookandfeel-fedora with light/dark themes
-Requires:       plasma-lookandfeel-fedora >= 6.5.3-3
+Requires:       horizon-themes >= 1.0-1
 
 # Renamed from KDE Initial System Setup / kiss
 Obsoletes:      kiss < %{version}-%{release}
