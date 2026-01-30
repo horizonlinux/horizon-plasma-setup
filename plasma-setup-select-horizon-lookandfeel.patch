@@ -1,7 +1,7 @@
 From 511242ebe730b9a16b4a07e1edfcf0673857998d Mon Sep 17 00:00:00 2001
-From: Neal Gompa <ngompa@fedoraproject.org>
-Date: Fri, 5 Dec 2025 16:55:33 -0500
-Subject: [PATCH] modules/prepareutil: Use Fedora look and feel for
+From: Marcel Mrówka <micro.mail88@gmail.com>
+Date: Fri, 30 Jan 2026 11:06 +0100
+Subject: [PATCH] modules/prepareutil: Use Horizon look and feel for
  light/dark toggle
 
 This ensures that the user look and feel is correctly set with the
