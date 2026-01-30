@@ -21,8 +21,8 @@ index b922c27..dfde9c2 100644
 -            const lightWallpaperFolder = 'wallpapers/Next/contents/images/';
 -            const darkWallpaperFolder = 'wallpapers/Next/contents/images_dark/';
 +            const imgFile = 'wallpaper.jpg';
-+            const lightWallpaperFolder = 'wallpapers/ZlataPraha/contents/images/';
-+            const darkWallpaperFolder = 'wallpapers/WarsawBlueHour/contents/images/';
++            const lightWallpaperFolder = 'backgrounds/ZlataPraha/';
++            const darkWallpaperFolder = 'backgrounds/WarsawBlueHour/';
  
              const wallpaperUrl = StandardPaths.locate(
                  StandardPaths.GenericDataLocation,
