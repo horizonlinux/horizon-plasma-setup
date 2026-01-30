@@ -1,7 +1,7 @@
 From 8f0e24c4f1075367c14b5f52ade96a93845e9882 Mon Sep 17 00:00:00 2001
-From: Neal Gompa <ngompa@fedoraproject.org>
-Date: Fri, 5 Dec 2025 16:25:47 -0500
-Subject: [PATCH] src/qml: LandingComponent: Use the Fedora wallpaper
+From: Marcel Mrówka <micro.mail88@gmail.com>
+Date: Fri, 30 Jan 2026 11:04 +0100
+Subject: [PATCH] src/qml: LandingComponent: Use the Horizon wallpapers
 
 This ensures that Plasma Setup starts up with the correct wallpaper
 branding.
@@ -13,7 +13,7 @@ diff --git a/src/qml/LandingComponent.qml b/src/qml/LandingComponent.qml
 index b922c27..dfde9c2 100644
 --- a/src/qml/LandingComponent.qml
 +++ b/src/qml/LandingComponent.qml
-@@ -44,9 +44,9 @@ Item {
+@@ -44,11 +44,12 @@ Item {
  
          source: {
 -            const imgFile = isLandscape ? '5120x2880.png' : '1080x1920.png';
@@ -24,6 +24,7 @@ index b922c27..dfde9c2 100644
 -                StandardPaths.GenericDataLocation,
 -                (Prepare.PrepareUtil.usingDarkTheme ? darkWallpaperFolder : lightWallpaperFolder) + imgFile
 -            );
+-
 -            if (!wallpaperUrl) {
 -                return StandardPaths.locate(StandardPaths.GenericDataLocation, lightWallpaperFolder + imgFile);
 -            }
@@ -31,8 +32,8 @@ index b922c27..dfde9c2 100644
 
 +            const imgFileDark = '4725x2658.jpg';
 +            const imgFileLight = '5755x3369.jpg';
-+            const lightWallpaperFolder = 'wallpapers/Next/contents/images/';
-+            const darkWallpaperFolder = 'wallpapers/Next/contents/images_dark/';
++            const lightWallpaperFolder = 'wallpapers/ZlataPraha/contents/images/';
++            const darkWallpaperFolder = 'wallpapers/WarsawBlueHour/contents/images/';
 +
 +            const wallpaperUrl = StandardPaths.locate(
 +                StandardPaths.GenericDataLocation,
