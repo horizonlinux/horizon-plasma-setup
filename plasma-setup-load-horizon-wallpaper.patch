@@ -20,7 +20,7 @@ index b922c27..dfde9c2 100644
 -            const imgFile = isLandscape ? '5120x2880.png' : '1080x1920.png';
 -            const lightWallpaperFolder = 'wallpapers/Next/contents/images/';
 -            const darkWallpaperFolder = 'wallpapers/Next/contents/images_dark/';
-+            const imgFile = repare.PrepareUtil.usingDarkTheme ? '4725x2658' : '5755x3369';
++            const imgFile = 'wallpaper.jpg';
 +            const lightWallpaperFolder = 'wallpapers/ZlataPraha/contents/images/';
 +            const darkWallpaperFolder = 'wallpapers/WarsawBlueHour/contents/images/';
  
