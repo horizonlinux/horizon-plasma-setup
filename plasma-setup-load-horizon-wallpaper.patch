@@ -16,16 +16,33 @@ index b922c27..dfde9c2 100644
 @@ -44,9 +44,9 @@ Item {
  
          source: {
-             // default wallpaper background
 -            const imgFile = isLandscape ? '5120x2880.png' : '1080x1920.png';
 -            const lightWallpaperFolder = 'wallpapers/Next/contents/images/';
 -            const darkWallpaperFolder = 'wallpapers/Next/contents/images_dark/';
-+            const imgFile = '3840x2160.jxl';
-+            const lightWallpaperFolder = 'wallpapers/ZlataPraha/contents/images/';
-+            const darkWallpaperFolder = 'wallpapers/WarsawBlueHour/contents/images/';
- 
-             const wallpaperUrl = StandardPaths.locate(
-                 StandardPaths.GenericDataLocation,
+-
+-            const wallpaperUrl = StandardPaths.locate(
+-                StandardPaths.GenericDataLocation,
+-                (Prepare.PrepareUtil.usingDarkTheme ? darkWallpaperFolder : lightWallpaperFolder) + imgFile
+-            );
+-            if (!wallpaperUrl) {
+-                return StandardPaths.locate(StandardPaths.GenericDataLocation, lightWallpaperFolder + imgFile);
+-            }
+-            return wallpaperUrl;
+
++            const imgFileDark = '4725x2658.jpg';
++            const imgFileLight = '5755x3369.jpg';
++            const lightWallpaperFolder = 'wallpapers/Next/contents/images/';
++            const darkWallpaperFolder = 'wallpapers/Next/contents/images_dark/';
++
++            const wallpaperUrl = StandardPaths.locate(
++                StandardPaths.GenericDataLocation,
++                (Prepare.PrepareUtil.usingDarkTheme ? darkWallpaperFolder : lightWallpaperFolder) + (Prepare.PrepareUtil.usingDarkTheme ? imgFileDark : imgFileLight)
++            );
++
++            if (!wallpaperUrl) {
++                return StandardPaths.locate(StandardPaths.GenericDataLocation, lightWallpaperFolder + imgFileLight);
++            }
++            return wallpaperUrl;
 -- 
 2.52.0
 
