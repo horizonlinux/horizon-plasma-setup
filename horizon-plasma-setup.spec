@@ -1,22 +1,19 @@
 %global qt6_minver 6.6.0
 %global kf6_minver 6.5.0
 
-%global commit 9ee33221806c9e1807c421a5a88a01475afed6c5
-%global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global date 20251208
-
 %global orgname org.kde.plasmasetup
 
 # https://docs.fedoraproject.org/en-US/packaging-guidelines/#_compiler_flags
 %global _hardened_build 1
 
 Name:           horizon-plasma-setup
-Version:        0.1.0~%{date}git%{shortcommit}
-Release:        3%{?dist}
+Version:        6.6.0
+Release:        1%{?dist}
 Summary:        Initial setup for systems using KDE Plasma
 License:        (GPL-2.0-or-later or GPL-3.0-or-later) and GPL-2.0-or-later and GPL-3.0-or-later and (LGPL-2.0-or-later or LGPL-3.0-or-later) and (LGPL-2.1-or-later or LGPL-3.0-or-later) and LGPL-2.1-or-later and BSD-2-Clause and CC0-1.0
 URL:            https://invent.kde.org/plasma/plasma-setup
-Source:         %{url}/-/archive/%{commit}/plasma-setup-%{shortcommit}.tar.bz2
+Source0: http://download.kde.org/%{stable_kf6}/plasma/%{maj_ver_kf6}.%{min_ver_kf6}.%{bug_ver_kf6}/plasma-setup-%{version}.tar.xz
+Source1: http://download.kde.org/%{stable_kf6}/plasma/%{maj_ver_kf6}.%{min_ver_kf6}.%{bug_ver_kf6}/plasma-setup-%{version}.tar.xz.sig
 
 # Backported changes
 
@@ -25,6 +22,7 @@ Source:         %{url}/-/archive/%{commit}/plasma-setup-%{shortcommit}.tar.bz2
 # Downstream only changes
 Patch1001:      plasma-setup-load-horizon-wallpaper.patch
 Patch1002:      plasma-setup-select-horizon-lookandfeel.patch
+
 
 BuildRequires:  cmake(Qt6Core) >= %{qt6_minver}
 BuildRequires:  cmake(Qt6Gui) >= %{qt6_minver}
@@ -47,6 +45,7 @@ BuildRequires:  git-core
 BuildRequires:  systemd-rpm-macros
 BuildRequires:  kf6-rpm-macros
 BuildRequires:  libappstream-glib
+BuildRequires:  system-backgrounds-kde
 BuildRequires:  qt6qml(org.kde.plasma.private.kcm_keyboard)
 
 Requires:       qt6qml(org.kde.plasma.private.kcm_keyboard)
@@ -55,7 +54,9 @@ Requires:       dbus-common
 Requires:       kf6-filesystem
 Requires:       kf6-kauth
 
-Requires:       horizon-themes >= 1.0-1
+# Require plasma-lookandfeel-fedora with light/dark themes
+Requires:       plasma-lookandfeel-fedora >= 6.5.3-3
+Requires:       system-backgrounds-kde
 
 # Renamed from KDE Initial System Setup / kiss
 Obsoletes:      kiss < %{version}-%{release}
@@ -74,7 +75,11 @@ ExcludeArch:    %{ix86}
 
 
 %prep
-%autosetup -n plasma-setup-%{commit} -S git_am
+%autosetup -p1
+# e.g. RHEL 10 has .png, not .jxl
+if [ -f /usr/share/wallpapers/Default/contents/images/3840x2160.png ]; then
+sed -i -e 's|\.jxl|.png|' src/qml/LandingComponent.qml
+fi
 
 
 %build
@@ -90,36 +95,47 @@ rm -fv %{buildroot}%{_kf6_libdir}/libcomponentspluginplugin.a
 
 
 %preun
-%systemd_preun plasma-setup.service
+%systemd_preun %{name}.service
 
 
 %post
-%systemd_post plasma-setup.service
+%systemd_post %{name}.service
 
 
 %postun
-%systemd_postun plasma-setup.service
+%systemd_postun %{name}.service
+
+
+%triggerun -- fedora-release-common < 44
+# When upgrading to Fedora 44, mark the system as configured if /etc/reconfigSys doesn't exist
+if [ ! -f "%{_sysconfdir}/reconfigSys" ]; then
+   touch %{_sysconfdir}/plasma-setup-done
+fi
+exit 0
 
 
 %files -f %{orgname}.lang
 %license LICENSES/*
 %config(noreplace) %{_sysconfdir}/xdg/plasmasetuprc
-%{_libexecdir}/plasma-setup*
-%{_kf6_libexecdir}/kauth/plasma-setup*
+%{_libexecdir}/%{name}*
+%{_kf6_libexecdir}/kauth/%{name}*
 %{_kf6_qmldir}/org/kde/plasmasetup/
 %{_kf6_plugindir}/packagestructure/plasmasetup.so
 %{_kf6_datadir}/plasma/packages/%{orgname}.*/
 %license %{_kf6_datadir}/plasma/packages/%{orgname}.finished/contents/ui/konqi-calling.png.license
-%{_unitdir}/plasma-setup*
-%{_sysusersdir}/plasma-setup*
-%{_tmpfilesdir}/plasma-setup*
+%{_unitdir}/%{name}*
+%{_sysusersdir}/%{name}*
+%{_tmpfilesdir}/%{name}*
 %{_datadir}/dbus-1/*/%{orgname}.*
 %{_datadir}/polkit-1/actions/%{orgname}.*
-%{_datadir}/polkit-1/rules.d/plasma-setup*
+%{_datadir}/polkit-1/rules.d/%{name}*
 %{_datadir}/qlogging-categories6/plasmasetup.categories
-%{_datadir}/plasma-setup/
+%{_datadir}/%{name}/
 
 
 %changelog
+* Wed Feb 25 2026 Marcel Mrówka <micro.mail88@gmail.com>
+- Update to 6.6.0
+
 * Thu Jan 29 2026 Marcel Mrówka <micro.mail88@gmail.com>
 - Create package, based of plasma-setup
