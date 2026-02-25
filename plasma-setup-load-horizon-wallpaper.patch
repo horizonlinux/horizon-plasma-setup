@@ -1,5 +1,5 @@
 From 8f0e24c4f1075367c14b5f52ade96a93845e9882 Mon Sep 17 00:00:00 2001
-From: Neal Gompa <ngompa@fedoraproject.org>
+From: Marcel Mrówka <micro.mail88@gmail.com>
 Date: Wed, 25 Feb 2026 20:46:00 +0100
 Subject: [PATCH] src/qml: LandingComponent: Use the Horizon wallpaper
 
