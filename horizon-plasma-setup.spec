@@ -76,12 +76,7 @@ ExcludeArch:    %{ix86}
 
 
 %prep
-%autosetup -p1
-# e.g. RHEL 10 has .png, not .jxl
-if [ -f /usr/share/wallpapers/Default/contents/images/3840x2160.png ]; then
-sed -i -e 's|\.jxl|.png|' src/qml/LandingComponent.qml
-fi
-
+%autosetup -n plasma-setup-%{version}
 
 %build
 %cmake_kf6
