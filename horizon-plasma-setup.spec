@@ -1,6 +1,6 @@
 %global qt6_minver 6.6.0
 %global kf6_minver 6.5.0
-%global plasma_ver 6.6.1
+%global plasma_ver 6.6.0
 
 %global orgname org.kde.plasmasetup
 
