@@ -16,7 +16,7 @@ index b922c27..dfde9c2 100644
 @@ -44,9 +44,9 @@ Item {
  
          source: {
-             // default wallpaper background
+            // default wallpaper background
 -            const imgFile = isLandscape ? '5120x2880.png' : '1080x1920.png';
 -            const lightWallpaperFolder = 'wallpapers/Next/contents/images/';
 -            const darkWallpaperFolder = 'wallpapers/Next/contents/images_dark/';
