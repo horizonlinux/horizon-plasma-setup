@@ -105,20 +105,20 @@ rm -fv %{buildroot}%{_kf6_libdir}/libcomponentspluginplugin.a
 %files -f %{orgname}.lang
 %license LICENSES/*
 %config(noreplace) %{_sysconfdir}/xdg/plasmasetuprc
-%{_libexecdir}/%{name}*
-%{_kf6_libexecdir}/kauth/%{name}*
+%{_libexecdir}/plasma-setup*
+%{_kf6_libexecdir}/kauth/plasma-setup*
 %{_kf6_qmldir}/org/kde/plasmasetup/
 %{_kf6_plugindir}/packagestructure/plasmasetup.so
 %{_kf6_datadir}/plasma/packages/%{orgname}.*/
 %license %{_kf6_datadir}/plasma/packages/%{orgname}.finished/contents/ui/konqi-calling.png.license
-%{_unitdir}/%{name}*
-%{_sysusersdir}/%{name}*
-%{_tmpfilesdir}/%{name}*
+%{_unitdir}/plasma-setup*
+%{_sysusersdir}/plasma-setup*
+%{_tmpfilesdir}/plasma-setup*
 %{_datadir}/dbus-1/*/%{orgname}.*
 %{_datadir}/polkit-1/actions/%{orgname}.*
-%{_datadir}/polkit-1/rules.d/%{name}*
+%{_datadir}/polkit-1/rules.d/plasma-setup*
 %{_datadir}/qlogging-categories6/plasmasetup.categories
-%{_datadir}/%{name}/
+%{_datadir}/plasma-setup/
 
 
 %changelog
