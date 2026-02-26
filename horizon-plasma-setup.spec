@@ -1,6 +1,6 @@
 %global qt6_minver 6.6.0
 %global kf6_minver 6.5.0
-%global plasma_ver 6.6.0
+%global plasma_ver 6.6.1
 
 %global orgname org.kde.plasmasetup
 
@@ -76,7 +76,7 @@ ExcludeArch:    %{ix86}
 
 
 %prep
-%autosetup -n plasma-setup-%{commit} -S git_am
+%autosetup -n plasma-setup-%{plasma_ver} -S git_am
 
 
 %build
