@@ -76,7 +76,8 @@ ExcludeArch:    %{ix86}
 
 
 %prep
-%autosetup -n plasma-setup-%{version}
+%autosetup -n plasma-setup-%{commit} -S git_am
+
 
 %build
 %cmake_kf6
@@ -91,24 +92,15 @@ rm -fv %{buildroot}%{_kf6_libdir}/libcomponentspluginplugin.a
 
 
 %preun
-%systemd_preun %{name}.service
+%systemd_preun plasma-setup.service
 
 
 %post
-%systemd_post %{name}.service
+%systemd_post plasma-setup.service
 
 
 %postun
-%systemd_postun %{name}.service
-
-
-%triggerun -- fedora-release-common < 44
-# When upgrading to Fedora 44, mark the system as configured if /etc/reconfigSys doesn't exist
-if [ ! -f "%{_sysconfdir}/reconfigSys" ]; then
-   touch %{_sysconfdir}/plasma-setup-done
-fi
-exit 0
-
+%systemd_postun plasma-setup.service
 
 %files -f %{orgname}.lang
 %license LICENSES/*
